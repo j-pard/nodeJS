@@ -1,7 +1,6 @@
 const jsonfile = require("jsonfile");
 
-// "/users" is the endpoint of the RESTfull API
-app.get("/users", (req, res) => {
+app.get('/users', function (req, res) {
       console.log("fetching all users");
     
       // jsonfile reading
@@ -9,4 +8,8 @@ app.get("/users", (req, res) => {
         // send file contents back to sender
         res.send(content);
       });
-    });
+});
+
+app.get('/', function (req, res) {
+      res.send('Hello World')
+});

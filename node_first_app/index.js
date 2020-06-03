@@ -1,16 +1,28 @@
-// import the NPM dependancy package
 const express = require("express");
+const jsonfile = require("jsonfile");
 
-// initialise express() inside and write to the app variable
 const app = express();
-
-// import route module and pass your app
-//require("./routes/userRoutes.js")(app);
-
-// choose what port on which to run the server
 const PORT = 5000;
 
-// use the app variable and listen on the port
+
+// ROUTING
+app.get('/users', function (req, res) {
+      console.log("fetching all users");
+    
+      // jsonfile reading
+      jsonfile.readFile("./DB/users.json", function(err, content) {
+        // send file contents back to sender
+        res.send(content);
+      });
+});
+
+app.get('/', function (req, res) {
+      res.send('Hello World')
+});
+// -----------
+
+
 app.listen(PORT, () => {
       console.log(`Server is running`);
 });
+
