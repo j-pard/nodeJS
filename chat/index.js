@@ -27,4 +27,5 @@ APP.get("/", (req, res) => {
 const IO = require('socket.io').listen(SERVER);
 IO.sockets.on('connection', (socket) => {
       console.log("New user has arrived.");
+      socket.emit('welcome', "Connection etablished, welcome.");
 });

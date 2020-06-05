@@ -13,6 +13,9 @@
       
       <script>
             let socket = io.connect('http://localhost:5000');
+            socket.on('welcome', (message) => {
+                  alert("ANC Server send you this message : " + message);
+            });
       </script>
 </body>
 </html>
