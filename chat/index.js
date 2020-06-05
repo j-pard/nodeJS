@@ -27,5 +27,13 @@ APP.get("/", (req, res) => {
 const IO = require('socket.io').listen(SERVER);
 IO.sockets.on('connection', (socket) => {
       console.log("New user has arrived.");
+
+      // EVENTS IN
+      socket.on('messageToServer', (message) => {
+            console.log("User send a message to Server : " + message);
+      });
+
+      // EVENTS OUT
+            // (event-type, message)
       socket.emit('welcome', "Connection etablished, welcome.");
 });
