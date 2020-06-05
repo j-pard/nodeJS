@@ -10,8 +10,8 @@ SERVER.listen(PORT, () => {
       console.log("Awesome Chat is listening...");
 });
 
-// ROUTING
 
+// ROUTING
 APP.get("/", (req, res) => {
       res.setHeader("Content-Type", "text/html; charset=utf-8");
       res.render('index.ejs');
@@ -22,15 +22,19 @@ APP.get("/", (req, res) => {
       res.status(404).send("Nothing was found here.");
 });
 
-// SOCKET
 
+// SOCKET
 const IO = require('socket.io').listen(SERVER);
 IO.sockets.on('connection', (socket) => {
       console.log("New user has arrived.");
 
       // EVENTS IN
+      socket.on('newPseudo', (pseudo) => {
+            socket.pseudo = pseudo;
+      });
+
       socket.on('messageToServer', (message) => {
-            console.log("User send a message to Server : " + message);
+            console.log(socket.pseudo + " send a message to Server : " + message);
       });
 
       // EVENTS OUT
@@ -39,4 +43,6 @@ IO.sockets.on('connection', (socket) => {
 
       // BROADCAST
       socket.broadcast.emit('welcome', "New user are incoming ...");
+
+// --------------------------------------------------------------------------------------------
 });

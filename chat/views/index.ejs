@@ -6,7 +6,8 @@
       <title>Awesome Node Chat</title>
 </head>
 <body>
-      <h1>Welcome in ANC Universe</h1>
+
+      <h1>Welcome you are in ANC Universe</h1>
 
       <input type="button" value="Contact Server" id="pokeServer">
 
@@ -18,6 +19,9 @@
             socket.on('welcome', (message) => {
                   alert("ANC Server send you this message : " + message);
             });
+
+            let pseudo = prompt("What's your name, User ?");
+            socket.emit('newPseudo', pseudo);
 
             const BTN = document.getElementById("pokeServer");
             BTN.addEventListener("click", () => {
