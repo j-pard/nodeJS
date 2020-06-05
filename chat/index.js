@@ -35,8 +35,10 @@ IO.sockets.on('connection', (socket) => {
 
       socket.on('messageToServer', (message) => {
             console.log(socket.pseudo + " send a message : " + message);
-            socket.emit('messageToAll', "You send : " + message);
-            socket.broadcast.emit('messageToAll', socket.pseudo + " send : " + message);
+            //socket.emit('messageToAll', "You send : " + message);
+            //socket.broadcast.emit('messageToAll', socket.pseudo + " send : " + message);
+            socket.emit('messageToAll', {author: "you", text: message});
+            socket.broadcast.emit('messageToAll', {author: socket.pseudo, text: message});
       });
 
 });
