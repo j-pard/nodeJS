@@ -36,4 +36,7 @@ IO.sockets.on('connection', (socket) => {
       // EVENTS OUT
             // (event-type, message)
       socket.emit('welcome', "Connection etablished, welcome.");
+
+      // BROADCAST
+      socket.broadcast.emit('welcome', "New user are incoming ...");
 });
