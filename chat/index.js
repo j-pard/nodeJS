@@ -14,7 +14,7 @@ SERVER.listen(PORT, () => {
 // ROUTING
 APP.get("/", (req, res) => {
       res.setHeader("Content-Type", "text/html; charset=utf-8");
-      res.render('index.ejs');
+      res.sendFile(__dirname + '/views/index.html');
 })
 
 .use((req, res) => {
@@ -28,21 +28,15 @@ const IO = require('socket.io').listen(SERVER);
 IO.sockets.on('connection', (socket) => {
       console.log("New user has arrived.");
 
-      // EVENTS IN
       socket.on('newPseudo', (pseudo) => {
             socket.pseudo = pseudo;
+            console.log("Last user is know as " + socket.pseudo);
       });
 
       socket.on('messageToServer', (message) => {
-            console.log(socket.pseudo + " send a message to Server : " + message);
+            console.log(socket.pseudo + " send a message : " + message);
+            socket.emit('messageToAll', "You send : " + message);
+            socket.broadcast.emit('messageToAll', socket.pseudo + " send : " + message);
       });
 
-      // EVENTS OUT
-            // (event-type, message)
-      socket.emit('welcome', "Connection etablished, welcome.");
-
-      // BROADCAST
-      socket.broadcast.emit('welcome', "New user are incoming ...");
-
-// --------------------------------------------------------------------------------------------
 });

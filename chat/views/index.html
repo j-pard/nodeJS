@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Awesome Node Chat</title>
+
+      <style>
+            body {
+                  width: 100vw;
+                  height: 100vh;
+                  overflow: hidden;
+            }
+
+            h1, h2 {
+                  text-align: center;
+            }
+
+            form {
+                  width: 100%;
+                  margin: 50px auto;
+                  text-align: center;
+            }
+      </style>
+</head>
+<body>
+      <h1>Awesome Node Chat</h1>
+      <h2>Using Express, Socket.io & more</h2>
+
+      <section id="chatbox"></section>
+
+      <form action="" method="POST">
+            <input type="text" name="messageToSend" id="messageToSend" placeholder="Write your message ...">
+            <input type="submit" value="Send" id="sendBtn">
+      </form>
+
+
+      <script src="/socket.io/socket.io.js"></script>      
+      <script>
+            const BTN = document.getElementById("sendBtn");
+            const CHATBOX = document.getElementById("chatbox");
+
+            let socket = io.connect('http://localhost:5000');
+
+            let pseudo = prompt("What's your name, User ?");
+            socket.emit('newPseudo', pseudo);
+
+            BTN.addEventListener("click", (event) => {
+                  let message = document.getElementById("messageToSend").value;
+                  socket.emit('messageToServer', message);
+                  event.preventDefault();
+            });
+
+            socket.on('messageToAll', (message) => {
+                  console.log(message);
+            })
+
+      </script>
+</body>
+</html>
