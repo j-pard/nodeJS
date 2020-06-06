@@ -23,13 +23,36 @@ BTN.addEventListener("click", (event) => {
 });
 
 socket.on('messageToAll', (message) => {
-      console.log(message);
+      // Full message
       let li = document.createElement("li");
+      li.classList.add("full-message");
+
+      // Author
       let authorZone = document.createElement("div");
       authorZone.innerHTML = message.author;
+      authorZone.classList.add("author");
       li.appendChild(authorZone);
+
+      // Text
       let messageZone = document.createElement("div");
       messageZone.innerHTML = message.text;
+      messageZone.classList.add("text");
       li.appendChild(messageZone);
+
+      // Style 
+      if(message.author == "You") {
+            authorZone.classList.add("you");
+            li.classList.add("text-right");
+      }
+      else {
+            li.classList.add("text-left");
+      }
+
+      // Including
       MESSENGER.appendChild(li);
+
+      // Scroll down
+      let allMsg = document.querySelectorAll("#messenger li");
+      let lastMsg = allMsg[allMsg.length-1];
+      lastMsg.scrollIntoView();
 });

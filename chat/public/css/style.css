@@ -1,6 +1,7 @@
 body {
       width: 100vw;
       height: 100vh;
+      max-height: 98vh;
       overflow: hidden;
 }
 
@@ -16,13 +17,52 @@ h1, h2 {
 
 #chatbox {
       height: 600px;
+      max-height: 70%;
       margin: 20px auto;
       box-sizing: border-box;
+      overflow-y: scroll;
 
       background-color: rgb(250, 250, 250);
       border: 1px solid rgb(240, 240, 240);
       border-radius: 20px;
       padding: 20px 30px;
+}
+
+#messenger {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+}
+
+#chatbox .full-message {
+      width: 100%;
+      max-width: 100%;
+      margin: 20px 0;
+      border-bottom: 1px solid rgb(240, 240, 240);
+      box-sizing: border-box;
+}
+
+#chatbox .full-message .author {
+      font-weight: bold;
+      width: 100%;
+      padding: 5px 10px;
+      color: gray;
+}
+
+#chatbox .full-message .you {
+      color: blue;
+}
+
+#chatbox .full-message .text {
+      padding: 5px 10px;
+      width: 100%;
+}
+
+.text-left {
+      text-align: left;
+}
+.text-right {
+      text-align: right;
 }
 
 form {
