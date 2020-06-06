@@ -10,6 +10,8 @@ SERVER.listen(PORT, () => {
       console.log("Awesome Chat is listening...");
 });
 
+// PUBLIC
+APP.use(EXPRESS.static('public'));
 
 // ROUTING
 APP.get("/", (req, res) => {
@@ -21,6 +23,7 @@ APP.get("/", (req, res) => {
       res.setHeader("Content-Type", "text/html; charset=utf-8");
       res.status(404).send("Nothing was found here.");
 });
+
 
 
 // SOCKET
